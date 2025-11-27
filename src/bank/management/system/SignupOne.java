@@ -22,6 +22,8 @@ public class SignupOne extends JFrame implements ActionListener{
         formPanel.setBackground(Color.WHITE);
 
         formPanel.setPreferredSize(new Dimension(850,850));
+        
+        setTitle("NEW ACCOUNT APPLICATION FORM - PAGE 1");
 
         Random ran = new Random();
         random = Math.abs((ran.nextLong() % 9000L) + 1000L);
