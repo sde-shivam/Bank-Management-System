@@ -1,7 +1,9 @@
 package bank.management.system;
 import javax.swing.*;
 import java.awt.*;
-public class SignupThree extends JFrame{
+import java.awt.event.*;
+import java.util.*;
+public class SignupThree extends JFrame implements ActionListener{
     JRadioButton r1,r2,r3,r4;
     JCheckBox c1,c2,c3,c4,c5,c6,c7;
     JButton submit,cancel;
@@ -137,6 +139,7 @@ public class SignupThree extends JFrame{
     submit.setForeground(Color.WHITE);
     submit.setFont(new Font("Raleway",Font.BOLD,14));
     submit.setBounds(250,720,100,30);
+    submit.addActionListener(this);
     formPanel.add(submit);
     
     cancel = new JButton("Cancel");
@@ -144,6 +147,7 @@ public class SignupThree extends JFrame{
     cancel.setForeground(Color.WHITE);
     cancel.setFont(new Font("Raleway",Font.BOLD,14));
     cancel.setBounds(420,720,100,30);
+    cancel.addActionListener(this);
     formPanel.add(cancel);
     
     getContentPane().setBackground(Color.WHITE);
@@ -158,6 +162,55 @@ public class SignupThree extends JFrame{
     setLocation(140, 2);
     setVisible(true);
     }
+    
+    public void actionPerformed(ActionEvent ae){
+     if(ae.getSource() == submit){
+         String accountType = null;
+         if(r1.isSelected()){
+           accountType = "Saving Account";
+         }else if(r2.isSelected()){
+           accountType = "Fixed Deposit Account";
+         }else if(r3.isSelected()){
+           accountType = "Current Account";
+         }else if(r4.isSelected()){
+           accountType = "Reccuring Deposit Account";
+         }
+         
+         Random random = new Random();
+         String cardnumber ="" + Math.abs((random.nextLong() % 90000000L)) + 5040936000000000L;
+         String pinnumber ="" + Math.abs((random.nextLong() % 9000L)) + 1000L; 
+         String facility ="";
+         if(c1.isSelected()){
+         facility = facility + "ATM CARD";
+         }else if(c2.isSelected()){
+         facility = facility + "Internet Banking";
+         }else if(c3.isSelected()){
+         facility = facility + "Mobile Banking";
+         }else if(c4.isSelected()){
+         facility = facility + "Email & SMS Alerts";
+         }else if(c5.isSelected()){
+         facility = facility + "Cheque Book";
+         }else if(c6.isSelected()){
+         facility = facility + "E-Statement";
+         }
+         
+         try{
+          if(accountType.equals("")){
+          JOptionPane.showMessageDialog(null,"Account Type is Required");
+          }else{
+          Conn conn = new Conn();
+          String query1 = 
+          }
+          
+          
+         }catch(Exception e){
+         System.out.println(e);
+         }
+         
+     }else if(ae.getSource() == cancel){
+     }
+    }
+            
     public static void main(String args[]){
     new SignupThree();
     }
