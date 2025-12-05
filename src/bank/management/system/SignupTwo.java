@@ -198,10 +198,12 @@ public class SignupTwo extends JFrame implements ActionListener{
             JOptionPane.showMessageDialog(null, "Existing Account selection is Required");
             }
             else{
-           Conn c=new Conn();
+           Conn c = new Conn();
            String query = "insert into signuptwo values('"+formno+"','"+sreligion+"','"+scategory+"','"+sincome+"','"+seducation+"','"+soccupation+"','"+span+"','"+saadhar+"','"+seniorcitizen+"','"+existingaccount+"')";
            c.s.executeUpdate(query);
           
+           setVisible(false);
+           new SignupThree(formno).setVisible(true);
           }
        }catch(Exception e){
         System.out.println(e);

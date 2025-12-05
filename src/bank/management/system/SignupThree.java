@@ -7,8 +7,9 @@ public class SignupThree extends JFrame implements ActionListener{
     JRadioButton r1,r2,r3,r4;
     JCheckBox c1,c2,c3,c4,c5,c6,c7;
     JButton submit,cancel;
-    
-    SignupThree(){
+    String formno;
+    SignupThree(String formno){
+    this.formno = formno;
         
     JPanel formPanel = new JPanel();
     formPanel.setLayout(null);
@@ -177,8 +178,8 @@ public class SignupThree extends JFrame implements ActionListener{
          }
          
          Random random = new Random();
-         String cardnumber ="" + Math.abs((random.nextLong() % 90000000L)) + 5040936000000000L;
-         String pinnumber ="" + Math.abs((random.nextLong() % 9000L)) + 1000L; 
+         String cardnumber ="" + Math.abs((random.nextLong() % 90000000L) + 5040936000000000L);
+         String pinnumber ="" + Math.abs((random.nextLong() % 9000L) + 1000L); 
          String facility ="";
          if(c1.isSelected()){
          facility = facility + "ATM CARD";
@@ -199,7 +200,11 @@ public class SignupThree extends JFrame implements ActionListener{
           JOptionPane.showMessageDialog(null,"Account Type is Required");
           }else{
           Conn conn = new Conn();
-          String query1 = 
+          String query1 = "insert into signupthree values('"+formno+"','"+accountType+"','"+cardnumber+"','"+pinnumber+"','"+facility+"')";
+          String query2 = "insert into login values('"+formno+"','"+cardnumber+"','"+pinnumber+"')";
+          conn.s.executeUpdate(query1);
+          conn.s.executeUpdate(query2);
+          JOptionPane.showMessageDialog(null,"Card number: "+cardnumber+"\nPin: "+pinnumber);
           }
           
           
@@ -212,6 +217,6 @@ public class SignupThree extends JFrame implements ActionListener{
     }
             
     public static void main(String args[]){
-    new SignupThree();
+    new SignupThree("");
     }
 }
